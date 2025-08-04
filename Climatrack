@@ -1,0 +1,17 @@
+import requests
+
+def get_weather(city, api_key):
+    base_url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}"
+    response = requests.get(base_url)
+    
+    if response.status_code == 200:
+        data = response.json()
+        print(f"📍 Location: {data['location']['name']}, {data['location']['country']}")
+        print(f"🌤️ Condition: {data['current']['condition']['text']}")
+        print(f"🌡️ Temperature: {data['current']['temp_c']}°C")
+    else:
+        print("Failed to retrieve weather data")
+
+# Example usage
+# Replace 'your_api_key' with a valid key from weatherapi.com
+get_weather("London", "your_api_key")
